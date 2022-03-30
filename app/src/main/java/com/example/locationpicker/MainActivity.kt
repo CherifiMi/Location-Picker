@@ -1,9 +1,11 @@
 package com.example.locationpicker
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.locationpicker.databinding.ActivityMainBinding
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var mapboxMap: MapboxMap
     private lateinit var mapboxNavigation: MapboxNavigation
-
+    private val FINE_LOCATION_RQ =101
     private lateinit var binding: ActivityMainBinding
 
 
@@ -48,12 +50,23 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, "Location", FINE_LOCATION_RQ)
+
         mapboxMap = binding.mapView.getMapboxMap()
         binding.mapView.location.apply {
             setLocationProvider(navigationLocationProvider)
         }
         init()
     }
+
+    private fun checkPermission(permission: String, name: String, requestCode: Int) {
+        if (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "$name permission is granted", Toast.LENGTH_LONG).show()
+        }else{
+            requestPermissions(arrayOf(permission), requestCode)
+        }
+    }
+
 
     private fun init() {
         initStyle()
@@ -83,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         binding.mapView.camera.easeTo(
             CameraOptions.Builder()
                 .center(Point.fromLngLat(location.longitude, location.latitude))
-                .zoom(12.0)
+                //.zoom(12.0)
                 .padding(EdgeInsets(500.0, 0.0, 0.0, 0.0))
                 .build(),
             mapAnimationOptions
