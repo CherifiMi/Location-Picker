@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Location Picker</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoibWl0bzIwMDMiLCJhIjoiY2t5N2N4Y2N4MDdzajJvbGp6cTV3Z211byJ9.1Zx7fdH3vx1BCepLE8safA</string>
 </resources>
