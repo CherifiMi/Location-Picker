@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initStyle() {
-        mapboxMap.loadStyleUri(Style.DARK)
+        mapboxMap.loadStyleUri("mapbox://styles/mito2003/cl1e96y3n002f14l8hdc952yd")
     }
 
     @SuppressLint("MissingPermission")
