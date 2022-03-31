@@ -46,8 +46,8 @@ class MapboxLocationPicker() {
     }
 
     fun initStyle(mapView: MapView){
-        //mapView.getMapboxMap().loadStyleUri("mapbox://styles/mito2003/cl1e96y3n002f14l8hdc952yd")
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS)
+        mapView.getMapboxMap().loadStyleUri("mapbox://styles/mito2003/cl1e96y3n002f14l8hdc952yd")
+        //mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS)
     }
 
 
