@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
             enabled = false
         }
 
-
+        binding.mapView.scalebar.enabled = false
 
 
 
