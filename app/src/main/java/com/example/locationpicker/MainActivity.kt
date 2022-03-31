@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initStyle() {
-        mapboxMap.loadStyleUri(Style.MAPBOX_STREETS)
+        mapboxMap.loadStyleUri(Style.DARK)
     }
 
     @SuppressLint("MissingPermission")
