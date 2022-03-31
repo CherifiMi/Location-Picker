@@ -11,16 +11,21 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.locationpicker.databinding.ActivityMainBinding
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.Style
+import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.animation.MapAnimationOptions
 import com.mapbox.maps.plugin.animation.camera
+import com.mapbox.maps.plugin.animation.scaleBy
 import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.maps.plugin.overlay.mapboxOverlay
+import com.mapbox.maps.plugin.scalebar.ScaleBar
+import com.mapbox.maps.plugin.scalebar.generated.ScaleBarSettings
 import com.mapbox.navigation.base.options.NavigationOptions
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.trip.session.LocationMatcherResult
@@ -71,8 +76,18 @@ class MainActivity : AppCompatActivity() {
         checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, "Location", FINE_LOCATION_RQ)
 
         mapboxMap = binding.mapView.getMapboxMap()
+
         binding.mapView.location.apply {
             setLocationProvider(navigationLocationProvider)
+
+            locationPuck = LocationPuck2D(
+                bearingImage = ContextCompat.getDrawable(
+                    this@MainActivity,
+                    R.drawable.mapbox_navigation_puck_icon
+                )
+            )
+
+            enabled = true
         }
         binding.backBtn.setOnClickListener{
             moves = true
@@ -83,6 +98,8 @@ class MainActivity : AppCompatActivity() {
                     "${binding.mapView.getMapboxMap().cameraState.center.coordinates()}"
             )
         }
+
+
 
         init()
     }
@@ -101,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         initNavigation()
     }
 
-    private fun initStyle() {
+    private fun initStyle(){
         mapboxMap.loadStyleUri("mapbox://styles/mito2003/cl1e96y3n002f14l8hdc952yd")
     }
 
@@ -136,5 +153,4 @@ class MainActivity : AppCompatActivity() {
         mapboxNavigation.stopTripSession()
         mapboxNavigation.unregisterLocationObserver(locationObserver)
     }
-
 }
