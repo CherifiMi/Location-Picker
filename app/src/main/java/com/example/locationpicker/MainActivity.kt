@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import com.example.locationpicker.databinding.ActivityMainBinding
 import com.mapbox.geojson.Point
@@ -77,6 +78,12 @@ class MainActivity : AppCompatActivity() {
             moves = true
         }
 
+        binding.coorBtn.setOnClickListener{
+            Log.d("MYLOCATION", "Your location is " +
+                    "${binding.mapView.getMapboxMap().cameraState.center.coordinates()}"
+            )
+        }
+
         init()
     }
 
@@ -122,11 +129,6 @@ class MainActivity : AppCompatActivity() {
                 .build(),
             mapAnimationOptions
         )
-
-        //binding.mapView.getMapboxMap().cameraState.center.latitude()
-
-
-
     }
 
     override fun onDestroy() {
