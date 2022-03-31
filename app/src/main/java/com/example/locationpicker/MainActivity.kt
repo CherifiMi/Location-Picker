@@ -22,10 +22,13 @@ import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.animation.MapAnimationOptions
 import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.animation.scaleBy
+import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.maps.plugin.logo.logo
 import com.mapbox.maps.plugin.overlay.mapboxOverlay
 import com.mapbox.maps.plugin.scalebar.ScaleBar
 import com.mapbox.maps.plugin.scalebar.generated.ScaleBarSettings
+import com.mapbox.maps.plugin.scalebar.scalebar
 import com.mapbox.navigation.base.options.NavigationOptions
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.trip.session.LocationMatcherResult
@@ -89,6 +92,7 @@ class MainActivity : AppCompatActivity() {
 
             enabled = true
         }
+
         binding.backBtn.setOnClickListener{
             moves = true
         }
@@ -98,6 +102,18 @@ class MainActivity : AppCompatActivity() {
                     "${binding.mapView.getMapboxMap().cameraState.center.coordinates()}"
             )
         }
+
+
+
+        binding.mapView.logo.updateSettings {
+            enabled = false
+        }
+
+        binding.mapView.attribution.updateSettings {
+            enabled = false
+        }
+
+
 
 
 
